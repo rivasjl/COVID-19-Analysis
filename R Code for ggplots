@@ -22,6 +22,8 @@ plot1 <- ggplot(data = top10, aes(x = reorder(location, +Total.Deaths), y = Tota
   scale_fill_brewer(palette = "RdYlGn") +
   guides(fill = guide_legend(title = "Location"))
 plot1
+
+
 #Importing query results into R for death rate
 deathrate <- read.csv(file.choose(), header = TRUE)
 deathratetop5 <- top_n(deathrate, 5)
