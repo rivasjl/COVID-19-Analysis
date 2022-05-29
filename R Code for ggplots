@@ -1,1 +1,22 @@
+```{r}
+# Importing ggplot library 
+library(ggplot2)
+library(RColorBrewer)
+data <- data.frame(obs = LETTERS[1:8],
+yval = c(1.25, 1.75, 1.5, 2.25, 2.75, 2.5, 1.4, 2))
+# Importing the query results into R
+deathcount <- read.csv(file.choose(), header = TRUE)
 
+# Filtering to get the to p10 countries by death count
+top10 <- top_n(deathcount, 10)
+
+
+# Plotting the Top 10 countries based on death count
+plot1 <- ggplot(data = top10, aes(x = reorder(location, +Total.Deaths), y = Total.Deaths)) +
+  geom_bar(stat = 'identity', fill = "darkblue") + 
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) + 
+  labs(title = "Top 10 Countries in Death Count", subtitle = "Source: ourworldindata.gov",
+       x = NULL, y = "Death count") +
+  theme_classic() +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdYlGn")
