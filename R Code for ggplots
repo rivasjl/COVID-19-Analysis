@@ -1,10 +1,10 @@
 ```{r}
 # Importing ggplot library 
-library(ggplot2)
-library(RColorBrewer)
-data <- data.frame(obs = LETTERS[1:8],
-yval = c(1.25, 1.75, 1.5, 2.25, 2.75, 2.5, 1.4, 2))
-# Importing the query results into R
+library(tidyverse)
+library(janitor)
+library(formattable)
+
+# Importing the query results into R for death count
 deathcount <- read.csv(file.choose(), header = TRUE)
 
 # Filtering to get the to p10 countries by death count
@@ -12,11 +12,33 @@ top10 <- top_n(deathcount, 10)
 
 
 # Plotting the Top 10 countries based on death count
-plot1 <- ggplot(data = top10, aes(x = reorder(location, +Total.Deaths), y = Total.Deaths)) +
-  geom_bar(stat = 'identity', fill = "darkblue") + 
+plot1 <- ggplot(data = top10, aes(x = reorder(location, +Total.Deaths), y = Total.Deaths, fill = location)) +
+  geom_bar(stat = 'identity') + 
   scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) + 
   labs(title = "Top 10 Countries in Death Count", subtitle = "Source: ourworldindata.gov",
-       x = NULL, y = "Death count") +
+       x = NULL, y = "Death count", caption = "Updated as of April 2021") +
   theme_classic() +
   coord_flip() +
-  scale_fill_brewer(palette = "RdYlGn")
+  scale_fill_brewer(palette = "RdYlGn") +
+  guides(fill = guide_legend(title = "Location"))
+plot1
+#Importing query results into R for death rate
+deathrate <- read.csv(file.choose(), header = TRUE)
+deathratetop5 <- top_n(deathrate, 5)
+
+# Add label position
+deathratetop5 <- deathratetop5 %>%
+  arrange(desc(location)) %>%
+  mutate(lab.ypos = cumsum(Death.Rate) - 0.5*Death.Rate)
+deathratetop5
+
+# Pie chart for top 10 death rate
+top5drplot <- ggplot(data = deathratetop5, aes(x = "", y = Death.Rate, fill = location)) +
+  geom_bar(stat = "identity") +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  geom_text(aes(y = lab.ypos, label = percent(Death.Rate/100))) + 
+  labs(title = "Top 5 Death Rates by Country", subtitle = "Source: ourworldindata.gov", caption = "Updated as of April 2021") +
+  guides(fill = guide_legend(title = "Location"))
+top5drplot
+```
