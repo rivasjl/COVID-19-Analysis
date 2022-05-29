@@ -27,7 +27,7 @@ Some questions that can be answered by looking at this dataset are:
 
 We can use a horizontal bar chart in order to create a visualization for this question and as you can see, the United States has a very high amount of deaths compared to other countries. Excluding Brazil, the United States has at least 3 times as many deaths as the other countries in the chart.
 
- ![top10dc](https://user-images.githubusercontent.com/106350577/170890864-0598aae1-d6af-4467-a3c6-90262d1f7f83.jpeg)
+ ![top10dc](https://user-images.githubusercontent.com/106350577/170894127-0eff9160-d7d6-4c72-9f14-4ac1a581293f.jpeg)
 
 
 **2. Which countries have the highest death rate of COVID-19?**
