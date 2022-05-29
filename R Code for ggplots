@@ -1,8 +1,10 @@
+
 ```{r}
-# Importing ggplot library 
+# Importing needed libraries
 library(tidyverse)
 library(janitor)
 library(formattable)
+library(dplyr)
 
 # Importing the query results into R for death count
 deathcount <- read.csv(file.choose(), header = TRUE)
@@ -10,37 +12,57 @@ deathcount <- read.csv(file.choose(), header = TRUE)
 # Filtering to get the to p10 countries by death count
 top10 <- top_n(deathcount, 10)
 
-
 # Plotting the Top 10 countries based on death count
 plot1 <- ggplot(data = top10, aes(x = reorder(location, +Total.Deaths), y = Total.Deaths, fill = location)) +
   geom_bar(stat = 'identity') + 
   scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) + 
-  labs(title = "Top 10 Countries in Death Count", subtitle = "Source: ourworldindata.gov",
-       x = NULL, y = "Death count", caption = "Updated as of April 2021") +
+  labs(title = "Top 10 Countries in Death Count", subtitle = "Updated as of April 2021",
+       x = NULL, y = "Death count", caption = "Source: ourworldindata.gov") +
   theme_classic() +
   coord_flip() +
   scale_fill_brewer(palette = "RdYlGn") +
   guides(fill = guide_legend(title = "Location"))
 plot1
 
-
-#Importing query results into R for death rate
+pl#Importing query results into R for death rate
 deathrate <- read.csv(file.choose(), header = TRUE)
 deathratetop5 <- top_n(deathrate, 5)
 
-# Add label position
-deathratetop5 <- deathratetop5 %>%
-  arrange(desc(location)) %>%
-  mutate(lab.ypos = cumsum(Death.Rate) - 0.5*Death.Rate)
-deathratetop5
+#Horizontal bar chart for death rate
+deathrateplot <- ggplot(data = deathratetop5, aes(x = reorder(location, +Death.Rate), y = Death.Rate, fill = location)) +
+  geom_bar(stat = 'identity') +
+  labs(title = "Top 5 Death Rates by Country", subtitle = "Updated as of April 2021", caption = "Source: ourworldindata.gov") +
+  guides(fill = guide_legend(title = "Location")) +
+  labs(x = "Location", y = "Death Rate") +
+  theme_classic() +
+  coord_flip()
+deathrateplot
 
-# Pie chart for top 10 death rate
-top5drplot <- ggplot(data = deathratetop5, aes(x = "", y = Death.Rate, fill = location)) +
-  geom_bar(stat = "identity") +
-  coord_polar("y", start = 0) +
-  theme_void() +
-  geom_text(aes(y = lab.ypos, label = percent(Death.Rate/100))) + 
-  labs(title = "Top 5 Death Rates by Country", subtitle = "Source: ourworldindata.gov", caption = "Updated as of April 2021") +
-  guides(fill = guide_legend(title = "Location"))
-top5drplot
+#Importing vaccination rate data set
+vaccrate <- read.csv(file.choose(), header = TRUE)
+# Getting the top 5 vaccination rates sorted by country
+vaccratetop5 <- top_n(vaccrate, 5) 
+
+# Horizontal bar chart of vaccination rates
+vaccrateplot <- ggplot(data = vaccratetop5, aes(x = reorder(location, +Vaccination.Rate), y = Vaccination.Rate, fill = location)) +
+  geom_bar(stat = 'identity') +
+  labs(title = "Top 5 Vaccination Rates by Country", subtitle = "Updated as of April 2021", caption = "Source: ourworldindata.gov") +
+  guides(fill = guide_legend(title = "Location")) +
+  labs(x = "Location", y = "Vaccination Rate") +
+  theme_classic() +
+  coord_flip()
+vaccrateplot  
+
+vac# Importing data set for Time Plot 
+timeplotvacc <- read.csv(file.choose(), header = TRUE) 
+# Changing Datatype of date column to a data type of date
+timeplotvacc$date <- as.Date(timeplotvacc$date)
+
+# Time series plot of Vaccination Rate in the U.S
+usvacr_plot <- ggplot(timeplotvacc, aes(x = date, y = numeric, fill = location)) +
+  geom_line() +
+  scale_x_date(date_labels = "%b/%Y") +
+  labs(title = "Change in Vaccination Rate Over Time in The United States", subtitle = "Updated as of April 2021", caption = "Source: ourworldindata.gov", x = "Date", y = "Vaccination Rate") +
+  theme_classic()
+  
 ```
