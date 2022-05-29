@@ -53,7 +53,7 @@ vaccrateplot <- ggplot(data = vaccratetop5, aes(x = reorder(location, +Vaccinati
   coord_flip()
 vaccrateplot  
 
-vac# Importing data set for Time Plot 
+# Importing data set for Time Plot 
 timeplotvacc <- read.csv(file.choose(), header = TRUE) 
 # Changing Datatype of date column to a data type of date
 timeplotvacc$date <- as.Date(timeplotvacc$date)
