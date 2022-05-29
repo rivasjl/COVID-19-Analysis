@@ -1,4 +1,5 @@
 # COVID-19 Exploratory and Statistical Analysis
+![image](https://user-images.githubusercontent.com/106350577/170891157-5b8870c9-bbfb-4704-b6bd-be250dca5cab.png)
 
 ## Goals
 The goal of this project is to answer questions that can be made from looking at the datset through the use of data manipulation in SQL and then visualizing our queries using R and creating a dasboard in Tableau.
