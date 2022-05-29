@@ -186,4 +186,24 @@ AND cdeath.date = vacc.date
 WHERE total_vaccinations IS NOT NULL
 GROUP BY cdeath.location
 ORDER BY 2 DESC;
+
+* Vaccination Rate for Countries
+WITH VaccRate (Location, Total_Vaccination, Population) AS
+(
+SELECT cdeath.location,
+MAX(people_fully_vaccinated) AS "Total Vaccinations",
+population
+FROM coviddeaths as cdeath
+INNER JOIN covidvaccinations as vacc
+ON cdeath.location = vacc.location 
+AND cdeath.continent = vacc.continent
+AND cdeath.date = vacc.date
+WHERE new_vaccinations IS NOT NULL
+GROUP BY cdeath.location, population ORDER BY 2 DESC
+)
+SELECT *,
+(Total_Vaccination::Numeric(20,2)/Population*100)::Numeric(5,2) AS "Vaccination Rate"
+FROM VaccRate
+WHERE Total_Vaccination IS NOT NULL AND Population IS NOT NULL
+ORDER BY 4 DESC;
 ``` 
