@@ -206,4 +206,26 @@ SELECT *,
 FROM VaccRate
 WHERE Total_Vaccination IS NOT NULL AND Population IS NOT NULL
 ORDER BY 4 DESC;
+
+*How vaccination rates have changed over time in the United States
+WITH VacInfo (Location, Date, Population,New_vaccinations, "Current Vaccinations") AS 
+(
+SELECT
+cdeath.location,
+cdeath.date,
+cdeath.population,
+vacc.new_vaccinations,
+SUM(new_vaccinations) OVER (PARTITION BY cdeath.location ORDER BY cdeath.location, cdeath.date) AS "Current Vaccinations"
+FROM coviddeaths as cdeath
+INNER JOIN covidvaccinations as vacc
+ON cdeath.location = vacc.location 
+AND cdeath.continent = vacc.continent
+AND cdeath.date = vacc.date
+WHERE new_vaccinations IS NOT NULL
+ORDER BY cdeath.location, cdeath.date
+)
+SELECT *, (("Current Vaccinations")/Population*100)::numeric(5,2)
+FROM VacInfo
+WHERE LOCATION LIKE '%States'
+
 ``` 
