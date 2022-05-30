@@ -8,6 +8,7 @@ The datsets that are used in this project contain information such as vaccinatio
 Skills that were used in this project: Aggregate functions, CTE, Join and Group By, ggplot2, Hypothesis Testing, Regression Analysis
 
 [Code for all plots](https://github.com/rivasjl/COVID-19-Analysis/blob/main/R%20Code%20for%20ggplots)
+
 [Code for queries](https://github.com/rivasjl/COVID-19-Analysis/blob/main/Code%20for%20SQL)
 
 Some questions that can be answered by looking at this dataset are:
