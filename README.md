@@ -1,4 +1,4 @@
-# COVID-19 Exploratory and Statistical Analysis
+# COVID-19 Exploratory Analysis
 ![image](https://user-images.githubusercontent.com/106350577/170891157-5b8870c9-bbfb-4704-b6bd-be250dca5cab.png)
 
 ## Goals
@@ -65,4 +65,4 @@ R Plot
 
 ![vacrateus](https://user-images.githubusercontent.com/106350577/170893497-f7ff9011-36e0-4ce1-b3eb-034e11191cf5.jpeg)
 
-## Statistical Analysis
+
