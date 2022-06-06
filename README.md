@@ -5,7 +5,7 @@
 The goal of this project is to answer questions that can be made from looking at the datset through the use of data manipulation in SQL and then visualizing our queries using R.
 The datsets that are used in this project contain information such as vaccination count, death count, location, time, icu patients, etc...
 
-Skills that were used in this project: Aggregate functions, CTE, Join and Group By, ggplot2, Hypothesis Testing, Regression Analysis
+Skills that were used in this project: Aggregate functions, CTE, Join and Group By, ggplot2
 
 [Code for all plots](https://github.com/rivasjl/COVID-19-Analysis/blob/main/R%20Code%20for%20ggplots)
 
