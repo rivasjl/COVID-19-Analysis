@@ -33,7 +33,8 @@ Looking at our query results, we can see that the top 3 countries with the highe
 **2. Which countries have the highest death rate of COVID-19?**
 
 Looking at our query results, we can see that the countries that have the highest death rate of COVID-19 include Vanuatu, Yemen, Mexico, Sudan and Syria. 
-One thing that can be noted is that 3 of these countries are found in the middle east. This brings up a question of why these countries have high death rates. Perhaps it is from the people living there not having access to good quality healthcare. Another thing to look at is Vanuatu's death rate which sits at 25%, this is a very high number and is more than at least twice the death rate of countries outside the top 2, but the sample size is very small. We only have a sample size of 4 which means that the true death rate could be lower. Once the sample size increases, there will be a clearer picture as to what the death rate really is. 
+One thing that can be noted is that 3 of these countries are found in the middle east. This brings up a question of why these countries have high death rates. Perhaps it is from the people living there not having access to good quality healthcare. Another thing to look at is Vanuatu's death rate which sits at 25%, this is a very high number and is more than at least twice the death rate of countries outside the top 2, but the sample size is very small. We only have a sample size of 4 which means that the true death rate could be lower. Once the sample size increases, there will be a clearer picture as to what the death rate really is.
+
 SQL Query Results:
 
 ![image](https://user-images.githubusercontent.com/106350577/170890982-081fca59-c864-4387-b917-ffff95fcfb0a.png)
